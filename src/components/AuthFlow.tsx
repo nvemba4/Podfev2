@@ -1,8 +1,6 @@
 'use client';
 import React, { useState } from "react";
-import LoginCard from "@/components/LoginCard";
-import WelcomeCard from "@/components/WelcomeCard";
-import ParentDashboard from "@/components/pages/ParentDashboard";
+
 import { AnimatePresence, motion } from 'framer-motion';
 
 const AuthFlow = () => {
@@ -21,7 +19,7 @@ const AuthFlow = () => {
               transition={{ duration: 0.4, ease: 'easeInOut' }}
             >
               <div className="flex items-center justify-center pt-14">
-              <LoginCard onLogin={() => setStep("welcome")} />
+             
               </div>
                 
             </motion.div>
@@ -33,7 +31,7 @@ const AuthFlow = () => {
               exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.0, ease: 'easeInOut' }}
             >
-              <WelcomeCard onParentSelect={() => setStep("parent-dashboard")} />
+             
             </motion.div>
           ) : (
             <motion.div
@@ -43,7 +41,7 @@ const AuthFlow = () => {
               exit={{ opacity: 0, y: -40 }}
               transition={{ duration: 0.0, ease: 'easeInOut' }}
             >
-              <ParentDashboard />
+             
             </motion.div>
           )}
         </AnimatePresence>
