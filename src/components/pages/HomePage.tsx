@@ -35,6 +35,8 @@ import UltimasNoticias from "@/components/UltimasNoticias"
 import Doacao from "@/components/Doacao"
 import NossosParceiros from "@/components/NossosParceiros"
 import Footer from "@/components/Footer"
+import MainBannerHeader, { MainBannerHeaderSlide } from "@/components/MainBannerHeader";
+import ExploreShoppings from "@/components/ExploreShoppings";
 
 // Mock data for demonstration
 const categories: Category[] = [
@@ -369,6 +371,161 @@ const categoryImages = {
   jewelry: "https://images.unsplash.com/photo-1522312346375-d1a52e2b99b3?auto=format&fit=crop&w=128&q=80"
 }
 
+const slides: MainBannerHeaderSlide[] = [
+  {
+    backgroundImage: "/images/slide_1.png",
+    title: "O MAIS VISTO DA 2º TEMPORADA",
+    subtitle: "SOBRE ESTE EPISÓDIO",
+    promoText: "Fortaleza Shopping • Luanda",
+    promoButtonText: "Ver Ofertas",
+    description: "Neste episódio fomos brindados com um testemunho impactante que fortaleceu mais a nossa fé em Deus, assiste agora a este maravilhoso episódio do Podfé.",
+    button: "ASSISTIR AGORA!",
+    buttonLink: "#",
+  },
+  {
+    backgroundImage: "/images/slide_3.png",
+    title: "PISÓDIO INSPIRADOR",
+    subtitle: "NOVA TEMPORADA",
+    promoText: "Shopping Talatona • Luanda",
+    promoButtonText: "Ver Ofertas",
+    description:"Neste episódio fomos brindados com um testemunho impactante que fortaleceu mais a nossa fé em Deus, assiste agora a este maravilhoso episódio do Podfé.",
+  button: "ASSISTIR AGORA!",
+  buttonLink: "#",
+  },
+  {
+    backgroundImage: "/images/slide_2.png",
+    title: "UM NOVO COMEÇO",
+    subtitle: "SOBRE ESTE EPISÓDIO",
+    promoText: "Shopping Avenida • Luanda",
+    promoButtonText: "Aproveitar",
+    description:"Neste episódio fomos brindados com um testemunho impactante que fortaleceu mais a nossa fé em Deus, assiste agora a este maravilhoso episódio do Podfé.",
+    button: "ASSISTIR AGORA!",
+    buttonLink: "#",
+  }
+];
+
+const podfeMidias = [
+  {
+    title: "Cine Podfé",
+    category: "Cinema Cristão",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Igreja Sede, Talatona",
+    image: "https://cdn.pixabay.com/photo/2016/09/14/08/18/film-1668918_1280.jpg", // substitua pela URL correta da imagem acima
+    icon: "🎬",
+    available: true,
+    schedule: "Sábados, 18h"
+  },
+  {
+    title: "Music Podfé",
+    category: "Louvor & Adoração",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Auditório Central, Talatona",
+    image: "https://cdn.pixabay.com/photo/2023/07/15/23/15/people-8129764_1280.jpg",
+    icon: "🎵",
+    available: true,
+    schedule: "Domingos, 10h"
+  },
+  {
+    title: "Podcast Podfé",
+    category: "Ensino Bíblico",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Estúdio de Mídia, Nova Vida",
+    image: "https://cdn.pixabay.com/photo/2024/06/22/17/46/radio-8846738_1280.jpg",
+    icon: "🎙️",
+    available: true,
+    schedule: "Segundas, 20h"
+  },
+  {
+    title: "ConcertAlive",
+    category: "Concerto Gospel",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Estádio Kilamba",
+    image: "https://cdn.pixabay.com/photo/2022/07/02/15/37/choir-7297500_1280.jpg",
+    icon: "🎤",
+    available: true,
+    schedule: "Eventos Especiais"
+  },
+  {
+    title: "Cine Podfé",
+    category: "Cinema Cristão",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Igreja Sede, Talatona",
+    image: "https://cdn.pixabay.com/photo/2016/09/14/08/18/film-1668918_1280.jpg", // substitua pela URL correta da imagem acima
+    icon: "🎬",
+    available: true,
+    schedule: "Sábados, 18h"
+  },
+  {
+    title: "Music Podfé",
+    category: "Louvor & Adoração",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Auditório Central, Talatona",
+    image: "https://cdn.pixabay.com/photo/2023/07/15/23/15/people-8129764_1280.jpg",
+    icon: "🎵",
+    available: true,
+    schedule: "Domingos, 10h"
+  },
+  {
+    title: "Podcast Podfé",
+    category: "Ensino Bíblico",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Estúdio de Mídia, Nova Vida",
+    image: "https://cdn.pixabay.com/photo/2024/06/22/17/46/radio-8846738_1280.jpg",
+    icon: "🎙️",
+    available: true,
+    schedule: "Segundas, 20h"
+  },
+  {
+    title: "ConcertAlive",
+    category: "Concerto Gospel",
+    state: "Luanda",
+    city: "Luanda",
+    location: "Estádio Kilamba",
+    image: "https://cdn.pixabay.com/photo/2022/07/02/15/37/choir-7297500_1280.jpg",
+    icon: "🎤",
+    available: true,
+    schedule: "Eventos Especiais"
+  },
+];
+
+
+export const bannerSlides = [
+  {
+    bg: "/images/slide_1.png",
+    title: "O MAIS VISTO DA 2º TEMPORADA",
+    subtitle: "SOBRE ESTE EPISÓDIO",
+    description:
+      "Neste episódio fomos brindados com um testemunho impactante que fortaleceu mais a nossa fé em Deus, assiste agora a este maravilhoso episódio do Podfé.",
+    button: "ASSISTIR AGORA!",
+    buttonLink: "#",
+  },
+  {
+    bg: "/images/slide_2.png",
+    title: "EPISÓDIO INSPIRADOR",
+    subtitle: "NOVA TEMPORADA",
+    description:
+      "Descubra histórias que inspiram e fortalecem a fé. Não perca este episódio especial do Podfé!",
+    button: "VER AGORA",
+    buttonLink: "#",
+  },
+  {
+    bg: "/images/slide_3.png",
+    title: "UM NOVO COMEÇO",
+    subtitle: "TEMPORADA ESPECIAL",
+    description:
+      "Acompanhe relatos emocionantes e experiências de fé nesta nova temporada do Podfé!",
+    button: "CONFIRA",
+    buttonLink: "#",
+  },
+]; 
+
 const HomePage: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = React.useState<string>()
   const [favorites, setFavorites] = React.useState<Set<string>>(new Set())
@@ -426,12 +583,16 @@ const HomePage: React.FC = () => {
         onFavoritesClick={() => console.log("Favorites clicked")}
         onMenuClick={() => console.log("Menu clicked")}
       />
-
-      <main className="container mx-auto px-0 space-y-12">
+        <MainBannerHeader slides={slides} />
+        <ExploreShoppings items={podfeMidias}  
+        titleHeader="Podfé Midia" 
+        subtitleHeader="Conectamos você aos principais centros comerciais do país, transformando cada shopping em uma experiência digital completa" />
+          
        
         {/* Banner Carousel with row arrows below */}
-        <div className="pt-0">
-          <BannerCarousel />
+    
+            {/*  <BannerCarousel /> */}
+         
           <EpisodiosRecentes />
           <PublicBanner/>
           <NoticiasePublicidade />
@@ -442,12 +603,12 @@ const HomePage: React.FC = () => {
           <Doacao />
           <NossosParceiros />
          
-        </div>
+       
 
         
 
         
-      </main>
+   
       <Footer />
     </div>
   )

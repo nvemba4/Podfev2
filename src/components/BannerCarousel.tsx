@@ -40,7 +40,7 @@ export default function BannerCarousel() {
   if (!slides.length) return <div>Nenhum slide encontrado.</div>;
 
   return (
-    <div className="w-full">
+    <div className="w-screen mt-28">
       <Swiper
         modules={[Pagination, Autoplay]}
         pagination={{ clickable: true }}

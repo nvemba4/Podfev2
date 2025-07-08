@@ -50,7 +50,7 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
 
   React.useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 8)
+      setScrolled(window.scrollY > 4)
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -82,7 +82,7 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
 
   // Determine expanded height
   const expanded = !!openMenu
-  const navbarHeight = expanded ? 320 : 56
+  const navbarHeight = expanded ? 320 : 40
 
   return (
     <>
@@ -94,6 +94,7 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
         className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${scrolled ? "bg-white/10 backdrop-blur-md" : "bg-white"}`}
         style={{
           height: navbarHeight,
+         
           transition: 'height 300ms cubic-bezier(0.4,0,0.2,1)',
           boxShadow: expanded ? '0 4px 32px 0 rgba(0,0,0,0.08)' : undefined,
         }}
