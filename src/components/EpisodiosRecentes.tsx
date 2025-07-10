@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, Suspense } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import "swiper/css";
@@ -7,6 +7,7 @@ import { FaPlay, FaShareAlt, FaHeart } from "react-icons/fa";
 import { mockEpisodes } from "@/mock/episodiosRecentesData";
 import Link from "next/link";
 import { motion } from 'framer-motion';
+import { useSearchParams } from "next/navigation";
 
 type Episode = {
   id: number;
@@ -16,7 +17,8 @@ type Episode = {
   idVideo?: string;
 };
 
-export default function EpisodiosRecentes() {
+const EpisodioRecentesPageContent = () => {
+  const searchParams = useSearchParams();
   const [episodes, setEpisodes] = useState<Episode[]>(mockEpisodes);
   const swiperRef = useRef<any>(null);
 
@@ -136,5 +138,13 @@ export default function EpisodiosRecentes() {
         </>
       )}
     </section>
+  );
+};
+
+export default function EpisodioRecentesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EpisodioRecentesPageContent />
+    </Suspense>
   );
 } 
