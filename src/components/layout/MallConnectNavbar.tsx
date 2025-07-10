@@ -4,15 +4,12 @@ import { ShoppingCart, User, Heart, Search } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import EpisodiosRecentes from "@/components/EpisodiosRecentes"
+import Link from "next/link";
 
 const NAV_ITEMS = [
   {
     label: "Home",
-    dropdown: [
-      { title: "Explore Mac", items: ["Explore All Mac", "MacBook Air", "MacBook Pro", "iMac", "Mac mini", "Mac Studio", "Mac Pro", "Displays"] },
-      { title: "Shop Mac", items: ["Shop Mac", "Mac Accessories", "Apple Trade In", "Financing"] },
-      { title: "More from Mac", items: ["Mac Support", "AppleCare+ for Mac", "macOS Sonoma", "Apps by Apple", "iCloud+"] },
-    ],
+    dropdown: null,
   },
   {
     label: "Serviços",
@@ -105,21 +102,31 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
           {/* Main menu row */}
           <div className="flex h-14 items-center justify-between w-full">
             {/* Logo */}
-            <div className="flex items-center min-w-[120px]">
+            <Link href="/" className="flex items-center min-w-[120px]">
               <Image src="/images/LogoPodFFE.png" alt="Logo" width={120} height={40} priority />
-            </div>
+            </Link>
             {/* Apple-style Nav Links */}
             <div className="hidden md:flex flex-1 justify-center gap-6 relative">
               {NAV_ITEMS.map((item) => (
-                <button
-                  key={item.label}
-                  className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
-                  onMouseEnter={() => item.dropdown && handleMenuEnter(item.label)}
-                  onFocus={() => item.dropdown && handleMenuEnter(item.label)}
-                  tabIndex={0}
-                >
-                  {item.label}
-                </button>
+                item.label === "Home" ? (
+                  <Link
+                    key={item.label}
+                    href="/"
+                    className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button
+                    key={item.label}
+                    className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
+                    onMouseEnter={() => item.dropdown && handleMenuEnter(item.label)}
+                    onFocus={() => item.dropdown && handleMenuEnter(item.label)}
+                    tabIndex={0}
+                  >
+                    {item.label}
+                  </button>
+                )
               ))}
             </div>
             {/* Right Side Icons */}

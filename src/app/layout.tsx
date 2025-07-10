@@ -31,7 +31,7 @@ export default function LayoutWrapper({ children }: { children: ReactNode }) {
   return (
 
      <html>
-    <body  className='bg-black'>
+    <body  className='bg-white'>
        <MallConnectNavbar />
       
        {pathname !== '/' && <div className="h-12" />}
