@@ -1,13 +1,13 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import YoutubeScreen from '../../components/ui/youtube-screen';
 import { useSearchParams } from 'next/navigation';
 import EpisodioRecenteDescriptions from '../../components/episodiorecenteDescriptions';
-import EpisodiosRecentes from '@/components/EpisodiosRecentes'
+import EpisodiosRecentes from '@/components/EpisodiosRecentes';
 import { mockEpisodes } from '@/mock/episodiosRecentesData';
 
-const EpisodioRecentesPage = () => {
+const EpisodioRecentesPageContent = () => {
   const searchParams = useSearchParams();
   const idVideo = searchParams.get('idVideo');
   const epId = searchParams.get('ep');
@@ -43,4 +43,10 @@ const EpisodioRecentesPage = () => {
   );
 };
 
-export default EpisodioRecentesPage; 
+export default function EpisodioRecentesPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <EpisodioRecentesPageContent />
+    </Suspense>
+  );
+} 
