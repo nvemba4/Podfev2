@@ -32,5 +32,15 @@ export async function GET() {
       category: "Evento",
       title: "Mudar para a cidade grande pode ser bastante estressante",
     },
+    {
+      image: "/images/Africanamericansoncast.png",
+      category: "Evento",
+      title: "Mudar para a cidade grande pode ser bastante estressante",
+    },
+    {
+      image: "/images/AlgenuraFinda.png",
+      category: "Evento",
+      title: "Mudar para a cidade grande pode ser bastante estressante",
+    },
   ]);
 } 

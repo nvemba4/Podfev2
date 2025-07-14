@@ -117,15 +117,15 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
                     {item.label}
                   </Link>
                 ) : (
-                  <button
-                    key={item.label}
-                    className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
-                    onMouseEnter={() => item.dropdown && handleMenuEnter(item.label)}
-                    onFocus={() => item.dropdown && handleMenuEnter(item.label)}
-                    tabIndex={0}
-                  >
-                    {item.label}
-                  </button>
+                <button
+                  key={item.label}
+                  className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
+                  onMouseEnter={() => item.dropdown && handleMenuEnter(item.label)}
+                  onFocus={() => item.dropdown && handleMenuEnter(item.label)}
+                  tabIndex={0}
+                >
+                  {item.label}
+                </button>
                 )
               ))}
             </div>

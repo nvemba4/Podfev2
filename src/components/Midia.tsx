@@ -33,7 +33,7 @@ const Midia: React.FC = () => {
     <section className="w-full max-w-7xl mx-auto px-4 pb-10">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
         {/* Main 3x2 grid (col-span-9) */}
-        <div className="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="md:col-span-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {mainCards.map((item, idx) => (
             <div key={idx} className="flex flex-col">
               <div className="w-full aspect-video bg-gray-100  overflow-hidden mb-3">
@@ -52,8 +52,7 @@ const Midia: React.FC = () => {
             </div>
           ))}
         </div>
-        {/* Second column (col-span-3) */}
-        <div className="md:col-span-2 flex flex-col gap-8">
+        {/* Second column (col-span-3)  <div className="md:col-span-2 flex flex-col gap-8">
           {col2Cards.map((item, idx) => (
             <div key={idx} className="flex flex-col border-b-2 pb-2">
               
@@ -65,7 +64,8 @@ const Midia: React.FC = () => {
               </h3>
             </div>
           ))}
-        </div>
+        </div> */}
+       
         {/* Third column (col-span-3) */}
         <div className="md:col-span-2 flex flex-col gap-8">
           {col3Cards.map((item, idx) => (

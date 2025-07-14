@@ -48,23 +48,23 @@ const EpisodioRecentesPageContent = () => {
         <div className="text-center text-gray-500 py-12">Nenhum episódio encontrado.</div>
       ) : (
         <>
-          <Swiper
-            modules={[Navigation, Pagination]}
+        <Swiper
+          modules={[Navigation, Pagination]}
             navigation={{
               prevEl: '.episodios-prev',
               nextEl: '.episodios-next',
             }}
-            pagination={{ clickable: true }}
-            spaceBetween={32}
-            slidesPerView={1}
-            breakpoints={{
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="w-full"
+          pagination={{ clickable: true }}
+          spaceBetween={32}
+          slidesPerView={1}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          className="w-full"
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-          >
-            {episodes.map((ep, idx) => (
+        >
+          {episodes.map((ep, idx) => (
               <SwiperSlide key={ep.id}>
                 <Link href={`/episodioRecentes?ep=${ep.id}&idVideo=${ep.idVideo || ''}`} className="block group">
                   <motion.div
@@ -74,11 +74,11 @@ const EpisodioRecentesPageContent = () => {
                     className="relative bg-white rounded shadow-lg overflow-hidden flex flex-col h-[480px] cursor-pointer group-hover:shadow-xl transition"
                   >
                     <div className="relative w-full h-48">
-                      <img
-                        src={ep.image}
-                        alt={ep.title}
+                <img
+                  src={ep.image}
+                  alt={ep.title}
                         className="w-full h-full object-cover"
-                      />
+                />
                       {/* Overlay and Play Icon on Hover (image only) */}
                       <div className="absolute inset-0 flex items-center justify-center bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <motion.span
@@ -91,29 +91,29 @@ const EpisodioRecentesPageContent = () => {
                           </motion.span>
                         </div>
                       </div>
-                    <div className="flex-1 flex flex-col p-6">
-                      <h3 className="font-semibold text-xl mb-2 leading-snug">
-                        {ep.title}
-                      </h3>
-                      <p className="text-gray-700 text-base mb-6 flex-1">
-                        {episodes[0] && ep.description.length > episodes[0].description.length
-                          ? ep.description.slice(0, episodes[0].description.length) + '...'
-                          : ep.description}
-                      </p>
+                <div className="flex-1 flex flex-col p-6">
+                  <h3 className="font-semibold text-xl mb-2 leading-snug">
+                    {ep.title}
+                  </h3>
+                  <p className="text-gray-700 text-base mb-6 flex-1">
+                    {episodes[0] && ep.description.length > episodes[0].description.length
+                      ? ep.description.slice(0, episodes[0].description.length) + '...'
+                      : ep.description}
+                  </p>
                       <div className="flex items-center justify-end mt-auto">
-                        <span className="flex items-center gap-1 text-gray-500 text-sm cursor-pointer hover:text-red-600">
-                          <FaShareAlt className="text-base" /> Compartilhar
-                        </span>
+                      <span className="flex items-center gap-1 text-gray-500 text-sm cursor-pointer hover:text-red-600">
+                        <FaShareAlt className="text-base" /> Compartilhar
+                      </span>
                         <span className="flex items-center gap-1 text-gray-500 text-sm cursor-pointer hover:text-red-600 ml-6">
-                          <FaHeart className="text-base" /> Gosto
-                        </span>
-                      </div>
+                        <FaHeart className="text-base" /> Gosto
+                      </span>
                     </div>
+                  </div>
                   </motion.div>
                 </Link>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            </SwiperSlide>
+          ))}
+        </Swiper>
           {/* Custom Arrow Controls */}
           <div className="absolute right-8 bottom-0 flex flex-row gap-3 z-10 pb-4">
             <button
