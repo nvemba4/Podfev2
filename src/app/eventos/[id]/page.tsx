@@ -1,3 +1,5 @@
+'use client';
+
 import React from 'react';
 import { recentNews } from '@/mock/noticiasPublicidadeData';
 import { Button } from '@/components/ui/button';
