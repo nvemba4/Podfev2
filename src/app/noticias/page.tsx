@@ -7,6 +7,8 @@ import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, Dialog
 import { Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
+
+
 export default function NoticiaDetailPage() {
   // All hooks at the top, before any return
   const [mainNews, setMainNews] = React.useState<any>(null);
@@ -15,6 +17,8 @@ export default function NoticiaDetailPage() {
   const [error, setError] = React.useState<string | null>(null);
   const [shareUrl, setShareUrl] = React.useState('');
   const [open, setOpen] = React.useState(false);
+  const [comment, setComment] = React.useState('');
+  const [comments, setComments] = React.useState<string[]>([]);
 
   React.useEffect(() => {
     fetch('/api/noticias-publicidade')
@@ -78,6 +82,40 @@ export default function NoticiaDetailPage() {
           </div>
           <div className="text-lg font-serif text-gray-800 mb-2 whitespace-pre-line">
             {noticia.content && noticia.content.replace(/"([^"]+)".*/, '')}
+          </div>
+          {/* Comment Input */}
+          <div className="my-8">
+            <h2 className="text-lg font-semibold mb-2">Deixe um comentário</h2>
+            <div className="flex gap-2 mb-4">
+              <input
+                type="text"
+                value={comment}
+                onChange={e => setComment(e.target.value)}
+                placeholder="Escreva seu comentário..."
+                className="flex-1 border rounded px-3 py-2"
+              />
+              <button
+                onClick={() => {
+                  if (comment.trim()) {
+                    setComments([comment, ...comments]);
+                    setComment('');
+                  }
+                }}
+                className="bg-[#e94d2c] text-white px-4 py-2 rounded-lg font-semibold hover:bg-[#d13d1c] transition"
+              >
+                Comentar
+              </button>
+            </div>
+            {comments.length > 0 && (
+              <div className="mt-4">
+                <h3 className="text-base font-semibold mb-2">Comentários</h3>
+                <ul className="space-y-2">
+                  {comments.map((c, idx) => (
+                    <li key={idx} className="bg-[#fdf1e2] border border-[#f5d6b3] rounded px-4 py-2 text-[#a05a2c]">{c}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
           </div>
           {/* Social Sharing */}
           <div className="flex gap-4 mt-8">
