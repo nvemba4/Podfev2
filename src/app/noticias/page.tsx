@@ -1,25 +1,49 @@
 'use client';
 
 import React from 'react';
-import { mainNews, recentNews } from '@/mock/noticiasPublicidadeData';
 import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
 import { Facebook, Instagram, MessageCircle } from 'lucide-react';
 import Link from 'next/link';
 
-export default function NoticiaDetailPage({ params }: { params: { id: string } }) {
-  const noticia = mainNews;
-  const related = recentNews.filter(e => noticia.relatedPosts.includes(e.id));
-
+export default function NoticiaDetailPage() {
+  // All hooks at the top, before any return
+  const [mainNews, setMainNews] = React.useState<any>(null);
+  const [recentNews, setRecentNews] = React.useState<any[]>([]);
+  const [loading, setLoading] = React.useState(true);
+  const [error, setError] = React.useState<string | null>(null);
   const [shareUrl, setShareUrl] = React.useState('');
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('/api/noticias-publicidade')
+      .then(res => {
+        if (!res.ok) throw new Error('Failed to fetch');
+        return res.json();
+      })
+      .then(data => {
+        setMainNews(data.mainNews);
+        setRecentNews(data.recentNews);
+        setLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setLoading(false);
+      });
+  }, []);
+
   React.useEffect(() => {
     setShareUrl(window.location.href);
   }, []);
 
-  const shareText = encodeURIComponent(noticia.title + ' - ' + noticia.description);
+  if (loading) return <div>Carregando...</div>;
+  if (error) return <div>Erro: {error}</div>;
+  if (!mainNews) return <div>Nenhuma notícia encontrada.</div>;
 
-  const [open, setOpen] = React.useState(false);
+  const noticia = mainNews;
+  const related = recentNews.filter(e => noticia.relatedPosts && noticia.relatedPosts.includes(e.id));
+  const shareText = encodeURIComponent(noticia.title + ' - ' + noticia.description);
 
   return (
     <div className="min-h-screen bg-[#fdf6ef] flex justify-center py-8 px-2">
@@ -50,10 +74,10 @@ export default function NoticiaDetailPage({ params }: { params: { id: string } }
           </div>
           {/* Scripture/Quote Box */}
           <div className="bg-[#fdf1e2] border border-[#f5d6b3] rounded-lg px-6 py-5 mb-6 text-center text-[#a05a2c] text-xl font-serif shadow-sm">
-            {noticia.content.match(/"([^"]+)"/)?.[1] || ''}
+            {noticia.content && noticia.content.match(/"([^"]+)"/)?.[1] || ''}
           </div>
           <div className="text-lg font-serif text-gray-800 mb-2 whitespace-pre-line">
-            {noticia.content.replace(/"([^"]+)".*/, '')}
+            {noticia.content && noticia.content.replace(/"([^"]+)".*/, '')}
           </div>
           {/* Social Sharing */}
           <div className="flex gap-4 mt-8">
@@ -117,9 +141,9 @@ export default function NoticiaDetailPage({ params }: { params: { id: string } }
         <aside className="w-full md:w-80 bg-[#fcf7f2] border-l border-[#f5e6d6] flex flex-col p-6 gap-8">
           {/* Tags */}
           <div>
-            <div className="text-[#e09a4b] font-semibold text-sm mb-2 tracking-wide uppercase">TAGS</div>
+            <div className="text-[#e94d2c] font-semibold text-sm mb-2 tracking-wide uppercase">TAGS</div>
             <div className="flex flex-wrap gap-2">
-              {noticia.tags.map((tag: string) => (
+              {noticia.tags && noticia.tags.map((tag: string) => (
                 <span key={tag} className="bg-[#fdf1e2] text-[#a05a2c] px-3 py-1 rounded-full text-xs font-semibold">{tag}</span>
               ))}
             </div>
@@ -130,19 +154,11 @@ export default function NoticiaDetailPage({ params }: { params: { id: string } }
             <ul className="divide-y divide-[#f5e6d6]">
               {related.map((post) => (
                 <li key={post.id} className="py-2 text-base text-gray-900 hover:text-[#e94d2c] cursor-pointer transition">
-                  <Link href={`/eventos/${post.id}`}>{post.title}</Link>
+                  <Link href={`/eventos?id=${post.id}`}>{post.title}</Link>
                 </li>
               ))}
             </ul>
           </div>
-          {/* Vertical Ads Banner     <div className="mt-8 flex justify-center">
-            <img
-              src="/images/banko-pub.png"
-              alt="Publicidade"
-              className="w-32 h-96 object-cover rounded-lg shadow"
-            />
-          </div>*/}
-      
         </aside>
       </div>
     </div>

@@ -56,7 +56,8 @@ export default function NoticiasePublicidade() {
       });
   }, []);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <div>Car
+    regando...</div>;
   if (error) return <div>Erro: {error}</div>;
   if (!data) return <div>Nenhum dado encontrado.</div>;
 
@@ -74,7 +75,7 @@ export default function NoticiasePublicidade() {
               className="w-full object-cover"
             />
             <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-              <Link href={`/noticias/${mainNews.id}`}>
+              <Link href={"/noticias"}>
                 <Button variant="outline" className="rounded-full bg-white/70 hover:bg-white text-black font-semibold px-6 py-2 text-lg shadow-lg backdrop-blur border-none">
                   Ler mais
                 </Button>
@@ -98,7 +99,7 @@ export default function NoticiasePublicidade() {
           <div
             key={item.id}
             className="flex flex-col bg-white shadow overflow-hidden cursor-pointer"
-            onClick={() => router.push(`/eventos/${item.id}`)}
+            onClick={() => router.push(`/eventos?id=${item.id}`)}
           >
             {item.image ? (
               <img
