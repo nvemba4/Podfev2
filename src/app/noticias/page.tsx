@@ -55,7 +55,7 @@ export default function NoticiaDetailPage() {
         {/* Main Content */}
         <div className="flex-1 p-8 md:pr-4">
           {/* Hero Image with overlay */}
-          <div className="relative overflow-hidden rounded-xl mb-8">
+          <div className="relative overflow-hidden mb-8">
             <Image
               src={noticia.image}
               alt={noticia.title}
