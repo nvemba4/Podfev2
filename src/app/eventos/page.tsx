@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { recentNews } from '@/mock/noticiasPublicidadeData';
@@ -8,12 +8,17 @@ import { Facebook, Instagram, MessageCircle, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogTrigger, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter, DialogClose } from '@/components/ui/dialog';
 
-export default function EventosListPage() {
+function EventosListPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const id = searchParams.get('id');
   const [open, setOpen] = React.useState(false);
   const [likedEvents, setLikedEvents] = React.useState<Set<number>>(new Set());
+  const [shareUrl, setShareUrl] = React.useState('');
+
+  React.useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
 
   const toggleLike = (eventId: number) => {
     setLikedEvents(prev => {
@@ -34,7 +39,6 @@ export default function EventosListPage() {
     const related = recentNews.filter(e => evento.relatedPosts.includes(e.id) && e.id !== evento.id);
 
     // Social share URLs
-    const shareUrl = typeof window !== 'undefined' ? window.location.href : '';
     const shareText = encodeURIComponent(evento.title + ' - ' + evento.description);
 
     return (
@@ -225,5 +229,13 @@ export default function EventosListPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function EventosListPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#fdf6ef] flex items-center justify-center">Carregando...</div>}>
+      <EventosListPageContent />
+    </Suspense>
   );
 } 
