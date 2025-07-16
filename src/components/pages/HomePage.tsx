@@ -373,7 +373,7 @@ const categoryImages = {
 
 const slides: MainBannerHeaderSlide[] = [
   {
-    backgroundImage: "/images/slide_1.png",
+    backgroundImage: "/images/banner-home.png",
     title: "O MAIS VISTO DA 2º TEMPORADA",
     subtitle: "SOBRE ESTE EPISÓDIO",
     promoText: "Fortaleza Shopping • Luanda",

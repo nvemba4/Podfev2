@@ -6,10 +6,15 @@ import { Input } from "@/components/ui/input"
 import EpisodiosRecentes from "@/components/EpisodiosRecentes"
 import Link from "next/link";
 
+
 const NAV_ITEMS = [
   {
     label: "Home",
-    dropdown: null,
+    dropdown: [
+      { title: "Explore Mac", items: ["Explore All Mac", "MacBook Air", "MacBook Pro", "iMac", "Mac mini", "Mac Studio", "Mac Pro", "Displays"] },
+      { title: "Shop Mac", items: ["Shop Mac", "Mac Accessories", "Apple Trade In", "Financing"] },
+      { title: "More from Mac", items: ["Mac Support", "AppleCare+ for Mac", "macOS Sonoma", "Apps by Apple", "iCloud+"] },
+    ],
   },
   {
     label: "Serviços",
@@ -41,6 +46,8 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
   const [search, setSearch] = React.useState("")
   const [scrolled, setScrolled] = React.useState(false)
   const [showModal, setShowModal] = React.useState(false)
+  const [scrollDirection, setScrollDirection] = React.useState<"up" | "down">("up");
+  const lastScrollY = React.useRef(0);
 
   // New: Track if mouse is over the navbar
   const [navbarHovered, setNavbarHovered] = React.useState(false)
@@ -81,6 +88,26 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
   const expanded = !!openMenu
   const navbarHeight = expanded ? 320 : 40
 
+  React.useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+        setScrollDirection("down");
+      } else {
+        setScrollDirection("up");
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+
+  
+
   return (
     <>
       {/* Fullscreen blur overlay when submenu is open */}
@@ -88,16 +115,18 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
         <div className="fixed inset-0 w-full h-full bg-white/60 backdrop-blur-xl z-40 transition-all duration-300" />
       )}
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${scrolled ? "bg-white/10 backdrop-blur-md" : "bg-white"}`}
-        style={{
-          height: navbarHeight,
-         
-          transition: 'height 300ms cubic-bezier(0.4,0,0.2,1)',
-          boxShadow: expanded ? '0 4px 32px 0 rgba(0,0,0,0.08)' : undefined,
-        }}
-        onMouseEnter={handleNavbarEnter}
-        onMouseLeave={handleNavbarLeave}
-      >
+          className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+            scrolled ? "bg-white" : "bg-white"
+          }`}
+          style={{
+            height: navbarHeight,
+            transform: scrollDirection === "down" ? "translateY(-100%)" : "translateY(0)",
+            transition: "transform 0.3s ease, height 300ms cubic-bezier(0.4,0,0.2,1)",
+            boxShadow: expanded ? "0 4px 32px 0 rgba(0,0,0,0.08)" : undefined,
+          }}
+          onMouseEnter={handleNavbarEnter}
+          onMouseLeave={handleNavbarLeave}
+        >
         <nav className="relative flex flex-col h-full max-w-7xl mx-auto px-4 z-50">
           {/* Main menu row */}
           <div className="flex h-14 items-center justify-between w-full">
@@ -108,15 +137,6 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
             {/* Apple-style Nav Links */}
             <div className="hidden md:flex flex-1 justify-center gap-6 relative">
               {NAV_ITEMS.map((item) => (
-                item.label === "Home" ? (
-                  <Link
-                    key={item.label}
-                    href="/"
-                    className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
-                  >
-                    {item.label}
-                  </Link>
-                ) : (
                 <button
                   key={item.label}
                   className={`text-sm font-medium px-2 py-1 rounded transition-colors duration-200 ${openMenu === item.label && expanded ? "text-black" : "text-gray-800 hover:text-black"}`}
@@ -126,7 +146,6 @@ const MallConnectNavbar = React.forwardRef<HTMLDivElement, any>((props, ref) => 
                 >
                   {item.label}
                 </button>
-                )
               ))}
             </div>
             {/* Right Side Icons */}

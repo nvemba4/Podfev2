@@ -45,7 +45,7 @@ const MainBannerHeader: React.FC<MainBannerHeader> = ({
   const slide = slides[current];
 
   return (
-    <div className="w-full relative  min-h-[350px] md:min-h-[500px] flex flex-col justify-end group overflow-hidden">
+    <div className="w-full relative md:mt-11 min-h-[350px]  lg:min-h-[660px] flex flex-col justify-end group overflow-hidden">
       {/* Fade background images */}
       {slides.map((s, i) => (
         <div
